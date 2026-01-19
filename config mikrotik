@@ -1,0 +1,20 @@
+Persiapan:
+Download aplikasi Winbox di komputer Anda.
+Hubungkan kabel LAN dari komputer ke salah satu port Ethernet di Mikrotik (biasanya Ether1).
+Buka Winbox, klik tab Neighbors, pilih MAC Address Mikrotik Anda, lalu klik Connect (username/password default biasanya admin/kosong). 
+Reset Konfigurasi: Jika baru pertama kali, masuk ke System > Reset Configuration, centang "No Default Configuration", lalu klik Reset Configuration. 
+Konfigurasi Interface & IP Address:
+Tentukan Port: Labeli port ether (misal: Ether1 untuk WAN, Ether2 untuk LAN) masuk ke Interfaces. 
+IP Address WAN (Internet): Masuk IP > Addresses, klik +, masukkan IP dari ISP (contoh: 192.168.1.2/24), pilih interface WAN (Ether1). 
+IP Address LAN: IP > Addresses, klik +, masukkan IP untuk jaringan lokal (contoh: 192.168.2.1/24), pilih interface LAN (Ether2). 
+Konfigurasi Akses Internet:
+Default Route (Gateway): IP > Routes, klik +, isi Gateway dengan IP Gateway dari ISP Anda, klik OK. 
+DNS Server: IP > DNS, isi Servers (contoh: 8.8.8.8 atau DNS ISP), centang Allow Remote Requests, klik OK. 
+NAT (Masquerade): IP > Firewall > NAT, klik +, di tab General isi Chain=srcnat, Out. Interface=Ether1 (WAN). Di tab Action, pilih Action=masquerade, klik OK. 
+DHCP Server (Otomatisasi IP Klien):
+IP > DHCP Server, klik DHCP Setup. 
+Pilih Interface LAN (Ether2), klik Next terus sampai selesai (ikuti wizard untuk range IP). 
+Konfigurasi Wireless (Jika ada WiFi):
+Wireless > WiFi Interfaces, klik interface wlan1, ubah Mode=ap bridge, isi SSID, di tab Security Profiles atur password WPA2. 
+Tambahkan IP Address untuk wlan1 (misal: 192.168.3.1/24). 
+Buat DHCP Server khusus untuk WiFi (mirip langkah 4, tapi pilih interface wlan1). 
